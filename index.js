@@ -55,11 +55,14 @@ app.post("/generate", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+console.log("TEST FROM UPLOADING FILES");
     const uploadDirectory = tempFile();
     const pdfFilePath = uploadDirectory + "/sample.pdf";
     const xlsxFilePath = uploadDirectory + "/sample.xlsx";
     const pdfFile = req.files.file[0];
     const xlsxFile = req.files.file[1];
+console.log(pdfFile);
+console.log(xlsxFile);
 
     pdfFile.mv(pdfFilePath, function (err) {
         if (err) {
