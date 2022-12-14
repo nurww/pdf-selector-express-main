@@ -6,7 +6,7 @@ const tempFile = require("./static/scripts/tempFile");
 const fs = require('fs');
 const path = require('path');
 const process = require('process');
-const javaRunner = require("./static/scripts/generate");
+const generate = require("./static/scripts/generate");
 
 process.chdir(__dirname);
 
@@ -43,7 +43,7 @@ app.post("/generate", (req, res) => {
 
     const zipFileDir = `static/${parentDir}/archival`;
     fs.mkdirSync(zipFileDir);
-    javaRunner(zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath)
+    generate(zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath);
 
     const data = {
         archivalPath: zipFileDir + "/compressed.zip"
