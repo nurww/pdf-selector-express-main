@@ -31,6 +31,8 @@ app.post("/generate", (req, res) => {
     const jsonFilePath = `static/${parentDir}/jsonData.json`;
     const jsonData = req.body.jsonData;
 
+    console.log(jsonData)
+
     fs.writeFile(jsonFilePath, jsonData, 'utf8', (err) => {
         if (err) {
             console.log("An error occured while writing JSON Object to File.");
