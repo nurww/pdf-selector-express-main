@@ -27,54 +27,18 @@ const uploadFiles = (formData) => {
       localStorage.setItem("xlsxFilePath", data.xlsxFilePath);
     });
 };
-
-jsonData = {
-  33123: {
-    _id: "33123",
-    title: "School",
-    body: { x: 89, y: 316 },
-    fontSize: "12",
-    fontFamily: "Arial",
-  },
-  68236: {
-    _id: "68236",
-    title: "Birthyear",
-    body: { x: 91, y: 369 },
-    fontSize: "12",
-    fontFamily: "Arial",
-  },
-  69924: {
-    _id: "69924",
-    title: "Name",
-    body: { x: 302, y: 124 },
-    fontSize: "12",
-    fontFamily: "Arial",
-  },
-  84478: {
-    _id: "84478",
-    title: "Surname",
-    body: { x: 409, y: 122 },
-    fontSize: "12",
-    fontFamily: "Arial",
-  },
-  99519: {
-    _id: "99519",
-    title: "Grade",
-    body: { x: 89, y: 344 },
-    fontSize: "12",
-    fontFamily: "Arial",
-  },
-};
-
 const generate = document.querySelector("#generate");
-
 generate.addEventListener("click", () => {
-  console.log(getCords());
+  let jsonData = getCords();
+  console.log(jsonData);
+
   const filesObj = {
     pdfFilePath: localStorage.getItem("pdfFilePath"),
     xlsxFilePath: localStorage.getItem("xlsxFilePath"),
-    jsonData: getCords(),
+    jsonData: jsonData,
   };
+
+  console.log(filesObj);
 
   fetch("/generate", {
     method: "POST", // body: JSON.stringify(jsonData),
