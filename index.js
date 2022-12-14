@@ -5,19 +5,21 @@ const port = 3000;
 const tempFile = require("./static/scripts/tempFile");
 const fs = require('fs');
 const path = require('path');
-
-
+const process = require('process');
 const javaRunner = require("./static/scripts/generate");
+
+process.chdir(__dirname);
 
 let counter = 0;
 
-app.use("/static", express.static("static"));
+app.use("/static", express.static(path.join(__dirname,"static")));
 app.use(fileUpload());
 app.use(express.json())
 
 app.get("/", (req, res) => {
     console.log(__dirname + " dir");
-    res.sendFile(__dirname + "\\index.html");
+    // res.sendFile(__dirname + "\\index.html");
+    res.sendFile(__dirname + "/index.html");
 });
 
 
@@ -43,11 +45,9 @@ app.post("/generate", (req, res) => {
     fs.mkdirSync(zipFileDir);
     javaRunner(zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath)
 
-    // res.redirect("/");
     const data = {
         archivalPath: zipFileDir + "/compressed.zip"
     }
-    console.log(data.archivalPath + " data.archivalPathdata.archivalPathdata.archivalPathdata.archivalPathdata.archivalPathdata.archivalPathdata.archivalPath")
 
     res.json(JSON.stringify(data));
 });
@@ -58,9 +58,6 @@ app.post("/", (req, res) => {
     const xlsxFilePath = uploadDirectory + "/sample.xlsx";
     const pdfFile = req.files.file[0];
     const xlsxFile = req.files.file[1];
-
-    console.log(pdfFile)
-    console.log(xlsxFile)
 
     pdfFile.mv(pdfFilePath, function (err) {
         if (err) {
@@ -81,8 +78,6 @@ app.post("/", (req, res) => {
 });
 
 app.get("/downloadArchival", (req, res) => {
-    console.log("WE ARE DOWNLOADING SOME FILES OR ARCHIVAL")
-    console.log(req.query.archivalPath)
     const file = req.query.archivalPath;
     res.download(file); // Set disposition and send it.
 
@@ -93,15 +88,11 @@ app.get("/fileLoaded", (req, res) => {
 })
 
 app.post("/upload", (req, res) => {
-    console.log(req.POST);
-    console.log(req.files);
     res.send("ok");
 });
 
 app.post("/check_status", (req, res) => {
-    console.log(req.POST);
     counter += 1;
-    console.log(counter);
     if (counter % 5 == 0) {
         res.send("ready");
     } else {
@@ -112,20 +103,3 @@ app.post("/check_status", (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
-console.log("test")
-
-// module.exports = { exec };
-// export {exec }
-// exec("ls -la", (error, stdout, stderr) => {
-//   if (error) {
-//       console.log(`error: ${error.message}`);
-//       return;
-//   }
-//   if (stderr) {
-//       console.log(`stderr: ${stderr}`);
-//       return;
-//   }
-//   console.log(`stdout: ${stdout}`);
-// });
-
-

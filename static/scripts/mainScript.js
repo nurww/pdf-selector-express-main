@@ -274,7 +274,7 @@ const getCords = (function (arrOfCords) {
 
     function makeJson() {
         const myJson = JSON.stringify(objOfCords);
-        console.log(myJson);
+        return myJson;
         // console.log(myJson);
         // const fs = require('fs');
         // fs.writeFile("thing.json", myJson, function(err, result) {
