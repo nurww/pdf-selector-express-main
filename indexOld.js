@@ -7,13 +7,13 @@ const fs = require("fs");
 const path = require("path");
 const process = require("process");
 const javaRunner = require("./scripts/generate");
+// const process = require("process");
+const generate = require("./scripts/generate");
 const nano = require("nanoseconds");
 const perf_hooks = require("perf_hooks");
 const { TokenClass } = require("typescript");
 
 process.chdir(__dirname);
-
-generator = javaRunner();
 
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(fileUpload());
@@ -23,21 +23,18 @@ var progressStatus = "default";
 var statusMap = {};
 var jobs = {};
 
-generator.emitter.on("ready", (data, p) => {
-  console.log("ready", data);
-  statusMap[data] = "ready";
-  jobs[data] = p;
-});
-
-generator.emitter.on("failed", (data) => {
-  console.log("ready", data);
-  statusMap[data] = "failed";
-});
-
 app.get("/", (req, res) => {
   console.log(__dirname + " dir");
   // res.sendFile(__dirname + "\\index.html");
   res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/check", (req, res) => {
+  req.query.token;
+
+  let status = getStatus(token);
+  if (status) {
+  }
 });
 
 app.post("/generate", (req, res) => {
@@ -52,14 +49,15 @@ app.post("/generate", (req, res) => {
       console.log("An error occured while writing JSON Object to File.");
       return console.log(err);
     }
+
     console.log("JSON file has been saved.");
   });
 
-  // function makes nano token
   const now = () => {
     const hrTime = process.hrtime();
     return hrTime[0] * 1000000000 + hrTime[1];
   };
+
   const token = now();
 
   statusMap = {
@@ -68,15 +66,15 @@ app.post("/generate", (req, res) => {
   const zipFileDir = `static/${parentDir}/archival`;
   fs.mkdirSync(zipFileDir);
 
-  generator.generate(
-    token,
-    zipFileDir,
-    pdfFilePath,
-    xlsxFilePath,
-    jsonFilePath
-  );
+  javaRunner(token, zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath);
 
-  res.send({ token: token });
+  setTimeout(() => {
+    const data = {
+      archivalPath: zipFileDir + "/compressed.zip",
+    };
+
+    res.json(JSON.stringify(data));
+  }, 10000);
 });
 
 app.post("/", (req, res) => {
@@ -120,14 +118,18 @@ app.post("/upload", (req, res) => {
 });
 
 app.post("/statuscheck", (req, res) => {
-  let token = req.body["token"];
+  setInterval(() => {
+    var result = statusCheck(token);
+    if (result == "ready") {
+    }
+  }, 1000);
 
-  let status = statusMap[token];
-  if (status == "ready") {
-    res.send({ status: status, path: jobs[token] });
-  } else {
-    res.send({ status: status });
-  }
+  // counter += 1;
+  // if (counter % 5 == 0) {
+  //   res.send("ready");
+  // } else {
+  //   res.send("pending");
+  // }
 });
 
 app.listen(port, () => {

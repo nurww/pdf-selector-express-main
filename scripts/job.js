@@ -11,8 +11,7 @@ setInterval(() => {
   let ns = hrTime[0] * 1000 + hrTime[1] / 1000000 + hrTime[1] / 1000000000;
   console.log(hrTime[1] / 1000000);
   console.log(
-    perf_hooks.performance.now() +
-      " console.log(perf_hooks.performance.now()console.log(perf_hooks.performance.now()console.log(perf_hooks.performance.now()"
+    perf_hooks.performance.now() + " console.log(perf_hooks.performance.now()"
   );
   console.log(
     new Date(Date.now()),

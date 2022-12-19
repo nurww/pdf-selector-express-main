@@ -1,27 +1,27 @@
-var stat = $("#status");
+// var stat = $("#status");
 
-stat.submit(function (e) {
-  e.preventDefault();
+// stat.submit(function (e) {
+//   e.preventDefault();
 
-  data = new FormData();
+//   data = new FormData();
 
-  $.ajax({
-    type: frm.attr("method"),
-    url: frm.attr("action"),
-    data: data,
-    enctype: "multipart/form-data",
-    processData: false,
-    contentType: false,
-    success: function (data) {
-      console.log("Uploading was successful.");
-      console.log(data);
-    },
-    error: function (data) {
-      console.log("An error occurred.");
-      console.log(data);
-    },
-  });
-});
+//   $.ajax({
+//     type: frm.attr("method"),
+//     url: frm.attr("action"),
+//     data: data,
+//     enctype: "multipart/form-data",
+//     processData: false,
+//     contentType: false,
+//     success: function (data) {
+//       console.log("Uploading was successful.");
+//       console.log(data);
+//     },
+//     error: function (data) {
+//       console.log("An error occurred.");
+//       console.log(data);
+//     },
+//   });
+// });
 
 // const process = require('process');
 // const generate = require("./static/scripts/generate");

@@ -1,7 +1,11 @@
-exports = module.exports = generate;
+const events = require("events");
+
+const emitter = new events.EventEmitter();
 
 const { spawn } = require("child_process");
-function generate(...list) {
+
+function generate(token, ...list) {
+  console.log(token);
   const child = spawn("java", [
     "-jar",
     "static/scripts/pdf-generator.jar",
@@ -20,46 +24,33 @@ function generate(...list) {
 
   child.stdout.setEncoding("utf8");
   child.stdout.on("data", function (data) {
-    //Here is where the output goes
-
     console.log("stdout: " + data);
-
     data = data.toString();
     scriptOutput += data;
   });
-
-  obj = {
-    finished: false,
-  };
-
-  setInterval(() => {
-    console.log(obj.finished);
-  }, 500);
+  // check status request will work like this
 
   child.on("close", function (code) {
-    obj.finished = true;
-
-    //Here you can get the exit code of the script
+    if (code == 0) {
+      emitter.emit("ready", token, list[0]);
+    } else {
+      emitter.emit("failed", token);
+    }
     console.log(
-      "________________________________________________________________________________________________________________________"
-    );
-    console.log(
-      "________________________________________________________________________________________________________________________"
-    );
-    console.log(
-      "________________________________________________________________________________________________________________________"
+      "___________________________________________________________________________________________________"
     );
     console.log("closing code: " + code);
-
     console.log("Full output of script: ", scriptOutput);
     console.log(
-      "________________________________________________________________________________________________________________________"
-    );
-    console.log(
-      "________________________________________________________________________________________________________________________"
-    );
-    console.log(
-      "________________________________________________________________________________________________________________________"
+      "___________________________________________________________________________________________________"
     );
   });
+  // showModal();
 }
+
+module.exports = function () {
+  return {
+    generate: generate,
+    emitter: emitter,
+  };
+};

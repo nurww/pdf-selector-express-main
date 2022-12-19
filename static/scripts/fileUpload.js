@@ -49,9 +49,41 @@ generate.addEventListener("click", () => {
     },
   })
     .then((res) => res.json())
-    .then((json) => {
-      const data = JSON.parse(json);
+    .then((data) => {
+      const token = data["token"];
+      localStorage.setItem("token", data);
       localStorage.setItem("archivalPath", data.archivalPath);
+
+      $("#pend").show();
+      $("#myModal").show();
+
+      const checkStatus = function () {
+        fetch("/statuscheck", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data["status"] == "ready") {
+              console.log(data);
+              $("#pend").hide();
+              $("#completed").show();
+              return;
+            } else if (data["status"] == "failed") {
+              console.log("failed");
+              $("#myModal").hide();
+            } else {
+              console.log("pending...");
+              setTimeout(checkStatus, 1000);
+            }
+          });
+      };
+
+      checkStatus();
     });
 });
 
