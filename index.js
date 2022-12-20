@@ -10,6 +10,7 @@ const javaRunner = require("./scripts/generate");
 const nano = require("nanoseconds");
 const perf_hooks = require("perf_hooks");
 const { TokenClass } = require("typescript");
+const { send } = require("process");
 
 process.chdir(__dirname);
 
@@ -65,8 +66,12 @@ app.post("/generate", (req, res) => {
   statusMap = {
     token: progressStatus,
   };
+
   const zipFileDir = `static/${parentDir}/archival`;
+  const archivalPath = `${zipFileDir}/compressed.zip`;
   fs.mkdirSync(zipFileDir);
+
+  console.log(zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath);
 
   generator.generate(
     token,
@@ -76,7 +81,7 @@ app.post("/generate", (req, res) => {
     jsonFilePath
   );
 
-  res.send({ token: token });
+  res.send({ token: token, archivalPath: archivalPath });
 });
 
 app.post("/", (req, res) => {

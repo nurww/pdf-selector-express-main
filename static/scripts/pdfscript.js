@@ -6,7 +6,6 @@ if (
 ) {
   url = localStorage.getItem("pdfFilePath");
 }
-console.log(url);
 
 // Loaded via <script> tag, create shortcut to access PDF.js exports.
 var pdfjsLib = window["pdfjs-dist/build/pdf"];

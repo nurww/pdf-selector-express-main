@@ -6,6 +6,7 @@ const { spawn } = require("child_process");
 
 function generate(token, ...list) {
   console.log(token);
+  console.log(...list);
   const child = spawn("java", [
     "-jar",
     "static/scripts/pdf-generator.jar",

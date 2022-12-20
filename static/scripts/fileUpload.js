@@ -22,11 +22,14 @@ const uploadFiles = (formData) => {
     .then((res) => res.json())
     .then((json) => {
       const data = JSON.parse(json);
+      console.log(data);
 
       localStorage.setItem("pdfFilePath", data.pdfFilePath);
       localStorage.setItem("xlsxFilePath", data.xlsxFilePath);
+      // localStorage.setItem('archivalPath',data)
     });
 };
+
 const generate = document.querySelector("#generate");
 generate.addEventListener("click", () => {
   let jsonData = getCords();
@@ -50,9 +53,12 @@ generate.addEventListener("click", () => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(JSON.stringify(data));
+
       const token = data["token"];
-      localStorage.setItem("token", data);
-      localStorage.setItem("archivalPath", data.archivalPath);
+      const archivalPath = data["archivalPath"];
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("archivalPath", archivalPath);
 
       $("#pend").show();
       $("#myModal").show();
@@ -97,5 +103,8 @@ download.addEventListener("click", () => {
     .then((blob) => {
       const file = window.URL.createObjectURL(blob);
       window.location.assign(file);
+    })
+    .finally(() => {
+      $("#myModal").hide();
     });
 });

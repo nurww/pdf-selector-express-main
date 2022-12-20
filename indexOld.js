@@ -49,15 +49,14 @@ app.post("/generate", (req, res) => {
       console.log("An error occured while writing JSON Object to File.");
       return console.log(err);
     }
-
     console.log("JSON file has been saved.");
   });
 
+  // function makes nano token
   const now = () => {
     const hrTime = process.hrtime();
     return hrTime[0] * 1000000000 + hrTime[1];
   };
-
   const token = now();
 
   statusMap = {
@@ -66,15 +65,7 @@ app.post("/generate", (req, res) => {
   const zipFileDir = `static/${parentDir}/archival`;
   fs.mkdirSync(zipFileDir);
 
-  javaRunner(token, zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath);
-
-  setTimeout(() => {
-    const data = {
-      archivalPath: zipFileDir + "/compressed.zip",
-    };
-
-    res.json(JSON.stringify(data));
-  }, 10000);
+  javaRunner(statusMap, zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath);
 });
 
 app.post("/", (req, res) => {
