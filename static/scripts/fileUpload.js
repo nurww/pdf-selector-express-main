@@ -40,71 +40,71 @@ if (!!pdfPath) {
 }
 
 
-jsonData = {
-    "29458": {
-        "_id": "29458",
-        "title": "Birthyear",
-        "body": {
-            "x": 74,
-            "y": 267
-        },
-        "fontSize": "22",
-        "fontFamily": "Arial"
-    },
-    "36650": {
-        "_id": "36650",
-        "title": "Grade",
-        "body": {
-            "x": 74,
-            "y": 304
-        },
-        "fontSize": "22",
-        "fontFamily": "Verdana"
-    },
-    "43292": {
-        "_id": "43292",
-        "title": "School",
-        "body": {
-            "x": 74,
-            "y": 285
-        },
-        "fontSize": "22",
-        "fontFamily": "Tahoma"
-    },
-    "59625": {
-        "_id": "59625",
-        "title": "Name",
-        "body": {
-            "x": 253,
-            "y": 103
-        },
-        "fontSize": "22",
-        "fontFamily": "Times New Roman"
-    },
-    "76898": {
-        "_id": "76898",
-        "title": "Surname",
-        "body": {
-            "x": 352,
-            "y": 105
-        },
-        "fontSize": "33",
-        "fontFamily": "Trebuchet MS"
-    }
-}
+// jsonData = {
+//     "29458": {
+//         "_id": "29458",
+//         "title": "Birthyear",
+//         "body": {
+//             "x": 74,
+//             "y": 267
+//         },
+//         "fontSize": "22",
+//         "fontFamily": "Arial"
+//     },
+//     "36650": {
+//         "_id": "36650",
+//         "title": "Grade",
+//         "body": {
+//             "x": 74,
+//             "y": 304
+//         },
+//         "fontSize": "22",
+//         "fontFamily": "Verdana"
+//     },
+//     "43292": {
+//         "_id": "43292",
+//         "title": "School",
+//         "body": {
+//             "x": 74,
+//             "y": 285
+//         },
+//         "fontSize": "22",
+//         "fontFamily": "Tahoma"
+//     },
+//     "59625": {
+//         "_id": "59625",
+//         "title": "Name",
+//         "body": {
+//             "x": 253,
+//             "y": 103
+//         },
+//         "fontSize": "22",
+//         "fontFamily": "Times New Roman"
+//     },
+//     "76898": {
+//         "_id": "76898",
+//         "title": "Surname",
+//         "body": {
+//             "x": 352,
+//             "y": 105
+//         },
+//         "fontSize": "33",
+//         "fontFamily": "Trebuchet MS"
+//     }
+// }
 
 
 const generate = document.querySelector("#generate")
 // console.log(jsonData)
 generate.addEventListener("click", () => {
 
-    // let jsonData = getCords();
+    let jsonData = getCords();
 
     const filesObj = {
         pdfFilePath: localStorage.getItem("pdfFilePath"),
         xlsxFilePath: localStorage.getItem("xlsxFilePath"),
-        // jsonData: jsonData
-        jsonData: JSON.stringify(jsonData)
+        jsonData: jsonData
+        // jsonData: JSON.stringify(jsonData)
     }
 
     console.log(filesObj)
