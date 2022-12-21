@@ -56,10 +56,11 @@ function renderPage(num) {
   document.getElementById("page_num").textContent = num;
 }
 
-/**
+/*
  * If another page rendering in progress, waits until the rendering is
  * finised. Otherwise, executes rendering immediately.
  */
+
 function queueRenderPage(num) {
   if (pageRendering) {
     pageNumPending = num;

@@ -26,17 +26,6 @@
         <div class="tooler">
             <div class="_tooler_topbar">
 
-                <!--                <form id="filesuploading" action="/" method="post" enctype="multipart/form-data">-->
-                <!--                    <label for="PDF Upload">PDF Upload</label>-->
-                <!--                    <input type="file" name="pdfFile"><br><br>-->
-                <!--                    <label for="Excel Upload">Excel Upload</label>-->
-                <!--                    <input type="file" name="xlxsFile">-->
-                <!--                    <br><br>-->
-                <!--&lt;!&ndash;                    <input id="fileUpload" type="submit" value="Files Upload">&ndash;&gt;-->
-                <!--&lt;!&ndash;                    <input id="fileUpload" value="Files Upload">&ndash;&gt;-->
-                <!--                </form>-->
-                <!--                <input id="fileUpload" type="button" value="Files Upload">-->
-
                 <form id="filesUploadForm">
                     <div class="formcont">
                         <label for="pdfFile">PDF Upload</label>
@@ -45,32 +34,16 @@
                         <input id="xlsxFile" class="button-48 " type="file" name="xlsxFile">
                         <input id="fileUpload" type="submit" class="button-48" value="Files Upload">
                     </div>
-
                 </form>
-
-                <!--            <form id="generateRun">-->
-                <!--                &lt;!&ndash; <b> Upload Your files </b><br>-->
-                <!--                <label for="excel">Excel:</label>-->
-                <!--                <input type="file" name="excel" id="excelFileUpload"> <br><br>-->
-
-                <!--                <label for="pdf">PDF:</label>-->
-                <!--                <input type="file" name="pdf" id="pdfFileUpload"><br><br>-->
-
-                <!--                <input type="radio" name="jsonChoose" id="makeJson" checked><label for="makeJson">Use-->
-                <!--                    new</label><br><br>-->
-                <!--                <input type="radio" name="jsonChoose" id="needJson"><label for="needJson">Already have Json-->
-                <!--                    file?</label><br><br>-->
-
-                <!--                <label id="labeljson" for="json" hidden>Json:</label>-->
-                <!--                <input type="file" name="json" id="jsonFileUpload" hidden> &ndash;&gt;-->
-
-                <!--                <input id="generate" type="submit" class="button-47" value="Generate">-->
-                <!--            </form>-->
                 <hr>
-
+                <form id="jsonform" action="/">
+                    <div class="formcont">
+                        <label id="labeljson" for="json">Json: (optional) </label>
+                        <input type="file" class="button-48" name="json" id="jsonFileUpload">
+                    </div>
+                </form>
+                <hr>
                 <button id="generate" class="button-47 ">Generate</button>
-                <hr>
-
             </div>
             <hr>
             <div class="_tooler_downbar ">
@@ -90,21 +63,12 @@
                     </select>
                     <br>
                 </div>
+
                 <hr>
                 <button type="submit" id='downloadJson' class="button-47 ">Download Json</button>
                 <a href="" id="downloadAnchorElem"></a>
             </div>
-
-            <!-- <div class="_tooler_download">
-                <hr>
-                <form id="statusbar" method='post' action='http://localhost:3000/check_status' target="empty"
-                    encType="multipart/form-data">
-                    <button id="status" type="submit" class="button-47 " value="statusCheck">Status Check</button>
-                </form>
-            </div> -->
-
         </div>
-        <!-- <iframe name="empty" src=""></iframe> -->
         <div class="workspace">
             <div class="wrap">
                 <div id="test" style="position: relative;">
@@ -129,9 +93,7 @@
     </div>
 
     <div id="myModal" class="modal">
-        <!-- The Modal -->
         <div class="modal-content">
-            <!-- Modal content -->
             <div class="modal-header">
                 <h2>Generating</h2>
             </div>
@@ -148,21 +110,14 @@
                     <p id="errormsg" style="color:rgb(224, 16, 16) ;"> 404 - Error from server</p>
                 </div>
             </div>
-
             <span id="closeModal" class="close">Close</span>
-
         </div>
-
-
     </div>
-
-
 </body>
 
 </html>
-<!-- <script src="/static/scripts/up-gen.js"></script> -->
+<script src="/static/scripts/filesChecker.js"></script>
 <script src="/static/scripts/mainScript.js"></script>
 <script src="/static/scripts/pdfscript.js"></script>
 <script src="/static/scripts/fileUpload.js"></script>
 <script src="/static/scripts/checkStatus.js"></script>
-<!-- <script src="/static/scripts/generate.js"></script> -->

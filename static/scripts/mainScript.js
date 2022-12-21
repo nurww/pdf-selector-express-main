@@ -16,7 +16,7 @@ const getCords = (function (arrOfCords) {
   const workspace = document.querySelector("#test");
 
   // event listeners
-  // fileInput.addEventListener('change',readFile);
+  fileInput.addEventListener("change", readFile);
   workspace.addEventListener("dblclick", clickingWorkspacehandler);
   downloadButton.addEventListener("click", downloadFunction);
   window.addEventListener("keydown", function (e) {

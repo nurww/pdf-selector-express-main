@@ -13,7 +13,6 @@ const { TokenClass } = require("typescript");
 const { send } = require("process");
 
 process.chdir(__dirname);
-
 generator = javaRunner();
 
 app.use("/static", express.static(path.join(__dirname, "static")));
@@ -85,6 +84,8 @@ app.post("/generate", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+  console.log("in upload back");
+
   const uploadDirectory = tempFile();
   const pdfFilePath = uploadDirectory + "/sample.pdf";
   const xlsxFilePath = uploadDirectory + "/sample.xlsx";
@@ -116,17 +117,8 @@ app.get("/downloadArchival", (req, res) => {
   res.download(file); // Set disposition and send it.
 });
 
-app.get("/fileLoaded", (req, res) => {
-  // res.
-});
-
-app.post("/upload", (req, res) => {
-  res.send("ok");
-});
-
 app.post("/statuscheck", (req, res) => {
   let token = req.body["token"];
-
   let status = statusMap[token];
   if (status == "ready") {
     res.send({ status: status, path: jobs[token] });

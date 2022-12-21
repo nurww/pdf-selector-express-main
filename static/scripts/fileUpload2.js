@@ -1,29 +1,15 @@
 const form = document.querySelector("#filesUploadForm");
 
-let isValid = function checkform() {
-  var inputs = form.getElementsByTagName("input");
-  if (inputs[0].value == "" || inputs[1].value == "") {
-    alert("Please fill all required fields");
-    return false;
-  }
-  return true;
-};
-
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let tof = isValid();
-  if (tof == true) {
-    console.log("dfdf");
-    const filesFormData = new FormData();
-    const pdfFile = document.querySelector("#pdfFile");
-    const xlsxFile = document.querySelector("#xlsxFile");
+  const filesFormData = new FormData();
+  const pdfFile = document.querySelector("#pdfFile");
+  const xlsxFile = document.querySelector("#xlsxFile");
 
-    filesFormData.append("file", pdfFile.files[0]);
-    filesFormData.append("file", xlsxFile.files[0]);
+  filesFormData.append("file", pdfFile.files[0]);
+  filesFormData.append("file", xlsxFile.files[0]);
 
-    uploadFiles(filesFormData);
-  }
-  return false;
+  uploadFiles(filesFormData);
 });
 
 const uploadFiles = (formData) => {
@@ -36,8 +22,11 @@ const uploadFiles = (formData) => {
     .then((res) => res.json())
     .then((json) => {
       const data = JSON.parse(json);
+      console.log(data);
+
       localStorage.setItem("pdfFilePath", data.pdfFilePath);
       localStorage.setItem("xlsxFilePath", data.xlsxFilePath);
+      // localStorage.setItem('archivalPath',data)
     });
 };
 
@@ -55,7 +44,7 @@ generate.addEventListener("click", () => {
   console.log(filesObj);
 
   fetch("/generate", {
-    method: "POST",
+    method: "POST", // body: JSON.stringify(jsonData),
     body: JSON.stringify(filesObj),
     headers: {
       Accept: "application/json",
