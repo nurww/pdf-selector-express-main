@@ -12,6 +12,8 @@ form.addEventListener("submit", e => {
     uploadFiles(filesFormData);
 })
 
+
+
 const uploadFiles = (formData) => {
     console.log("Uploading files");
 
@@ -20,47 +22,89 @@ const uploadFiles = (formData) => {
 
     }).then(res => res.json())
         .then(json => {
-<<<<<<< HEAD
-            const data = JSON.parse(json)
-            console.log("______________________________________________________________________")
-            console.log(data)
-            console.log("______________________________________________________________________")
-=======
             const data = JSON.parse(json);
             console.log(data);
->>>>>>> 14e466b64c1118c1cf72979cd8e86ed588dfe3f5
 
             localStorage.setItem("pdfFilePath", data.pdfFilePath);
             localStorage.setItem("xlsxFilePath", data.xlsxFilePath);
 
-        })
+        }).finally(() => {
+        renderPdf(localStorage.getItem("pdfFilePath"));
+    })
 }
 
-// jsonData = {
-//     "33123": {
-//         "_id": "33123", "title": "School", "body": {"x": 89, "y": 316}, "fontSize": "12", "fontFamily": "Arial"
-//     },
-//     "68236": {
-//         "_id": "68236", "title": "Birthyear", "body": {"x": 91, "y": 369}, "fontSize": "12", "fontFamily": "Arial"
-//     },
-//     "69924": {"_id": "69924", "title": "Name", "body": {"x": 302, "y": 124}, "fontSize": "12", "fontFamily": "Arial"},
-//     "84478": {
-//         "_id": "84478", "title": "Surname", "body": {"x": 409, "y": 122}, "fontSize": "12", "fontFamily": "Arial"
-//     },
-//     "99519": {"_id": "99519", "title": "Grade", "body": {"x": 89, "y": 344}, "fontSize": "12", "fontFamily": "Arial"}
-// }
+let pdfPath = localStorage.getItem("pdfFilePath");
+
+if (!!pdfPath) {
+    renderPdf(pdfPath);
+}
+
+
+jsonData = {
+    "29458": {
+        "_id": "29458",
+        "title": "Birthyear",
+        "body": {
+            "x": 74,
+            "y": 267
+        },
+        "fontSize": "22",
+        "fontFamily": "Arial"
+    },
+    "36650": {
+        "_id": "36650",
+        "title": "Grade",
+        "body": {
+            "x": 74,
+            "y": 304
+        },
+        "fontSize": "22",
+        "fontFamily": "Verdana"
+    },
+    "43292": {
+        "_id": "43292",
+        "title": "School",
+        "body": {
+            "x": 74,
+            "y": 285
+        },
+        "fontSize": "22",
+        "fontFamily": "Tahoma"
+    },
+    "59625": {
+        "_id": "59625",
+        "title": "Name",
+        "body": {
+            "x": 253,
+            "y": 103
+        },
+        "fontSize": "22",
+        "fontFamily": "Times New Roman"
+    },
+    "76898": {
+        "_id": "76898",
+        "title": "Surname",
+        "body": {
+            "x": 352,
+            "y": 105
+        },
+        "fontSize": "33",
+        "fontFamily": "Trebuchet MS"
+    }
+}
 
 
 const generate = document.querySelector("#generate")
 // console.log(jsonData)
 generate.addEventListener("click", () => {
 
-    let jsonData = getCords();
+    // let jsonData = getCords();
 
     const filesObj = {
         pdfFilePath: localStorage.getItem("pdfFilePath"),
         xlsxFilePath: localStorage.getItem("xlsxFilePath"),
-        jsonData: jsonData
+        // jsonData: jsonData
+        jsonData: JSON.stringify(jsonData)
     }
 
     console.log(filesObj)
@@ -87,3 +131,6 @@ download.addEventListener("click", () => {
             window.location.assign(file);
         });
 })
+
+
+showMe()

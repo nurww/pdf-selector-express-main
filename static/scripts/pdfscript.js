@@ -93,7 +93,7 @@ document.getElementById("next").addEventListener("click", onNextPage);
 /**
  * Asynchronously downloads PDF.
  */
-let renderPdf = function() {
+let renderPdf = function(url) {
   pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
     pdfDoc = pdfDoc_;
     document.getElementById("page_count").textContent = pdfDoc.numPages;
@@ -103,4 +103,9 @@ let renderPdf = function() {
   });
 }
 
-renderPdf();
+// renderPdf();
+
+
+function showMe() {
+  console.log("SHOW ME")
+}
