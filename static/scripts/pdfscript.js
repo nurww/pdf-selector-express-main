@@ -1,8 +1,8 @@
 // var url = "static/pdfUploaded/sample.pdf";
 let url;
 if (
-  localStorage.getItem("pdfFilePath") != null &&
-  localStorage.getItem("pdfFilePath") !== undefined
+    localStorage.getItem("pdfFilePath") != null &&
+    localStorage.getItem("pdfFilePath") !== undefined
 ) {
   url = localStorage.getItem("pdfFilePath");
 }
@@ -12,15 +12,15 @@ var pdfjsLib = window["pdfjs-dist/build/pdf"];
 
 // The workerSrc property shall be specified.
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "//mozilla.github.io/pdf.js/build/pdf.worker.js";
+    "//mozilla.github.io/pdf.js/build/pdf.worker.js";
 
 var pdfDoc = null,
-  pageNum = 1,
-  pageRendering = false,
-  pageNumPending = null,
-  scale = 1,
-  canvas = document.getElementById("the-canvas"),
-  ctx = canvas.getContext("2d");
+    pageNum = 1,
+    pageRendering = false,
+    pageNumPending = null,
+    scale = 1,
+    canvas = document.getElementById("the-canvas"),
+    ctx = canvas.getContext("2d");
 
 /*
  * Get page info from document, resize canvas accordingly, and render page.
@@ -96,23 +96,14 @@ document.getElementById("next").addEventListener("click", onNextPage);
 /**
  * Asynchronously downloads PDF.
  */
-<<<<<<< HEAD
-let renderPdf = function(url) {
-=======
-let renderPdf = function () {
->>>>>>> 6c4f2b10cda7f96617441f8148e9fb46e86ba860
+let renderPdf = function (url) {
   pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
     pdfDoc = pdfDoc_;
     document.getElementById("page_count").textContent = pdfDoc.numPages;
 
     // Initial/first page rendering
     renderPage(pageNum);
+  }).catch(e => {
+    console.log(e.toString())
   });
 };
-
-// renderPdf();
-
-
-function showMe() {
-  console.log("SHOW ME")
-}
