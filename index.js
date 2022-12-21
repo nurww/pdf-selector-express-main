@@ -17,8 +17,6 @@ app.use(fileUpload());
 app.use(express.json())
 
 app.get("/", (req, res) => {
-    console.log(__dirname + " dir");
-    // res.sendFile(__dirname + "\\index.html");
     res.sendFile(__dirname + "/index.html");
 });
 
@@ -30,8 +28,6 @@ app.post("/generate", (req, res) => {
     const parentDir = path.basename(path.dirname(pdfFilePath));
     const jsonFilePath = `static/${parentDir}/jsonData.json`;
     const jsonData = req.body.jsonData;
-
-    console.log(jsonData)
 
     fs.writeFile(jsonFilePath, jsonData, 'utf8', (err) => {
         if (err) {
@@ -48,7 +44,8 @@ app.post("/generate", (req, res) => {
     generate(zipFileDir, pdfFilePath, xlsxFilePath, jsonFilePath);
 
     const data = {
-        archivalPath: zipFileDir + "/compressed.zip"
+        archivalPath: zipFileDir + "/compressed.zip",
+        token: "dsa"
     }
 
     res.json(JSON.stringify(data));

@@ -21,6 +21,9 @@ const uploadFiles = (formData) => {
     }).then(res => res.json())
         .then(json => {
             const data = JSON.parse(json)
+            console.log("______________________________________________________________________")
+            console.log(data)
+            console.log("______________________________________________________________________")
 
             localStorage.setItem("pdfFilePath", data.pdfFilePath);
             localStorage.setItem("xlsxFilePath", data.xlsxFilePath);
