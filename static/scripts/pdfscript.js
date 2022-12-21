@@ -1,9 +1,11 @@
 // var url = "static/pdfUploaded/sample.pdf";
 let url;
-if (localStorage.getItem("pdfFilePath") != null && localStorage.getItem("pdfFilePath") !== undefined) {
+if (
+  localStorage.getItem("pdfFilePath") != null &&
+  localStorage.getItem("pdfFilePath") !== undefined
+) {
   url = localStorage.getItem("pdfFilePath");
 }
-console.log(url)
 
 // Loaded via <script> tag, create shortcut to access PDF.js exports.
 var pdfjsLib = window["pdfjs-dist/build/pdf"];
@@ -54,10 +56,11 @@ function renderPage(num) {
   document.getElementById("page_num").textContent = num;
 }
 
-/**
+/*
  * If another page rendering in progress, waits until the rendering is
  * finised. Otherwise, executes rendering immediately.
  */
+
 function queueRenderPage(num) {
   if (pageRendering) {
     pageNumPending = num;
@@ -93,7 +96,11 @@ document.getElementById("next").addEventListener("click", onNextPage);
 /**
  * Asynchronously downloads PDF.
  */
+<<<<<<< HEAD
 let renderPdf = function(url) {
+=======
+let renderPdf = function () {
+>>>>>>> 6c4f2b10cda7f96617441f8148e9fb46e86ba860
   pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
     pdfDoc = pdfDoc_;
     document.getElementById("page_count").textContent = pdfDoc.numPages;
@@ -101,7 +108,7 @@ let renderPdf = function(url) {
     // Initial/first page rendering
     renderPage(pageNum);
   });
-}
+};
 
 // renderPdf();
 

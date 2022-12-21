@@ -10,13 +10,14 @@
     <title>PDF Generator</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/modalstyle.css">
-    <link rel="icon" type="image/svg+xml" href="/static/logopdf.svg" sizes="50x50"/>
+    <link rel="icon" type="image/svg+xml" href="/static/logopdf.svg" sizes="50x50" />
 </head>
 
 <body>
-<div class="header">
-    <a href="#default" class="logo">{PDF} Generator</a>
+    <div class="header">
+        <a href="#default" class="logo">{PDF} Generator</a>
 
+<<<<<<< HEAD
     <div class="header-right">
         <a class="active" href="/">Workspace</a>
     </div>
@@ -101,48 +102,109 @@
                 &nbsp; &nbsp;
                 <button id="next" class="button-47 ">Next</button>
             </div>
+=======
+        <div class="header-right">
+            <a class="active" href="/">Workspace</a>
+>>>>>>> 6c4f2b10cda7f96617441f8148e9fb46e86ba860
         </div>
     </div>
 
-    <!-- workspace with PDF pages and canva -->
-</div>
+    <div class="container">
+        <div class="tooler">
+            <div class="_tooler_topbar">
 
-<div id="myModal" class="modal">
-    <!-- The Modal -->
-    <div class="modal-content">
-        <!-- Modal content -->
-        <div class="modal-header">
-            <h2>Generating</h2>
+                <form id="filesUploadForm">
+                    <div class="formcont">
+                        <label for="pdfFile">PDF Upload</label>
+                        <input id="pdfFile" class="button-48 " type="file" name="pdfFile">
+                        <label for="xlsxFile">Excel Upload</label>
+                        <input id="xlsxFile" class="button-48 " type="file" name="xlsxFile">
+                        <input id="fileUpload" type="submit" class="button-48" value="Files Upload">
+                    </div>
+                </form>
+                <hr>
+                <form id="jsonform" action="/">
+                    <div class="formcont">
+                        <label id="labeljson" for="json">Json: (optional) </label>
+                        <input type="file" class="button-48" name="json" id="jsonFileUpload">
+                    </div>
+                </form>
+                <hr>
+                <button id="generate" class="button-47 ">Generate</button>
+            </div>
+            <hr>
+            <div class="_tooler_downbar ">
+                <div class="formcont">
+                    <label for="font-scroller">Font Size</label>
+                    <input id="font-scroller" type="text" class="button-48" value="12">
+                    <label for="font-scroller">Font Family</label>
+                    <select name="font-family" id="font-family" class="button-48" style="width: 100%;">
+                        <option value="Arial" selected>Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Brush Script MT">Brush Script MT</option>
+                    </select>
+                    <br>
+                </div>
+
+                <hr>
+                <button type="submit" id='downloadJson' class="button-47 ">Download Json</button>
+                <a href="" id="downloadAnchorElem"></a>
+            </div>
         </div>
-        <div class="modal-body">
-            <div id="pend" hidden>
-                <p style="color:white ;font-weight:500">Pending...</p>
-                <div id="pendCircle" class="dot-spin " style=" margin: 30px auto;"></div>
-            </div>
-            <div id="completed" hidden>
-                <p id="completed" style="color:rgb(10, 170, 10) ;">Completed!</p>
-                <button type="submit" id='downloadArchive' class="button-47 ">Download Archive</button>
-                <a href="" id="downloadArchivator"></a>
-            </div>
-            <div id="error" hidden>
-                <p id="errormsg" style="color:rgb(224, 16, 16) ;"> 404 - Error from server</p>
+        <div class="workspace">
+            <div class="wrap">
+                <div id="test" style="position: relative;">
+                    <p>
+                        <span id="offx"></span>
+                        <span id="offy"></span>
+                    </p>
+                    <canvas id="the-canvas" style="border: 1px solid black; z-index: 0;">
+                    </canvas>
+                </div>
+                <div class="pagination">
+                    <button id="prev" class="button-47 ">Previous</button>
+                    &nbsp; &nbsp;
+                    <span>Page: <b><span id="page_num"></span> / <span id="page_count"></span></b></span>
+                    &nbsp; &nbsp;
+                    <button id="next" class="button-47 ">Next</button>
+                </div>
             </div>
         </div>
 
-        <span class="close">Close</span>
-
+        <!-- workspace with PDF pages and canva -->
     </div>
 
-
-</div>
-
-
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Generating</h2>
+            </div>
+            <div class="modal-body">
+                <div id="pend" hidden>
+                    <p style="color:white ;font-weight:500">Pending...</p>
+                    <div id="pendCircle" class="dot-spin " style=" margin: 30px auto;"></div>
+                </div>
+                <div id="completed" hidden>
+                    <p id="completed" style="color:rgb(10, 170, 10) ;">Completed!</p>
+                    <button id="download" class="button-47 ">Download</button>
+                </div>
+                <div id="error" hidden>
+                    <p id="errormsg" style="color:rgb(224, 16, 16) ;"> 404 - Error from server</p>
+                </div>
+            </div>
+            <span id="closeModal" class="close">Close</span>
+        </div>
+    </div>
 </body>
 
 </html>
-<!-- <script src="/static/scripts/up-gen.js"></script> -->
+<script src="/static/scripts/filesChecker.js"></script>
 <script src="/static/scripts/mainScript.js"></script>
 <script src="/static/scripts/pdfscript.js"></script>
 <script src="/static/scripts/fileUpload.js"></script>
 <script src="/static/scripts/checkStatus.js"></script>
-<script src="/static/scripts/generate.js"></script>

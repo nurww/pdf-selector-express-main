@@ -8,7 +8,9 @@ body{
     color:aliceblue;
     font-family:sans-serif;
 }
-
+label{
+    padding: 5px;
+}
 .header {
     overflow: hidden;
     background-color: #f1f1f1;
@@ -68,7 +70,7 @@ body{
     border-radius: 10px;
     background-color:rgb(40 40 40);
     margin: 10px ;
-    width: 250px;
+    width: 300px;
     padding: 10px;
 }
 
@@ -150,8 +152,52 @@ canvas[id^="input_"]{
     justify-content: space-between;
 }
 
+.formcont{
+    background-color: azure;
+    padding: 15px;
+    background-color:rgb(70 70 70);
+    border-radius: 10px;
+}
+
+
+.button-48{
+    width: 100%;
+    background-color: rgb(40, 40, 40);
+    border-radius: 5px;
+    border-width: 0;
+    color: #d8d8d8;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 10px auto;
+    padding: 8px 12px;
+    text-align: center;
+    transition: all 200ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+#next{
+    width: 80px;
+}
+
+.button-48:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(85, 85, 85);
+
+
+}
+
+
 
 .button-47{
+    /* width: 100%; */
     background-color: rgba(70 70 70);
     border-radius: 5px;
     border-width: 0;
@@ -164,7 +210,7 @@ canvas[id^="input_"]{
     line-height: 20px;
     list-style: none;
     margin: 10px auto;
-    padding: 10px 12px;
+    padding: 10px 25px;
     text-align: center;
     transition: all 200ms;
     vertical-align: baseline;
