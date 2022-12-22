@@ -77,32 +77,39 @@ app.post("/generate", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log("in upload back");
 
-  const uploadDirectory = tempFile();
-  const pdfFilePath = uploadDirectory + "/sample.pdf";
-  const xlsxFilePath = uploadDirectory + "/sample.xlsx";
-  const pdfFile = req.files.file[0];
-  const xlsxFile = req.files.file[1];
+    console.log("in upload back");
 
-  pdfFile.mv(pdfFilePath, function (err) {
-    if (err) {
-      res.send(err);
-    }
-  });
-  xlsxFile.mv(xlsxFilePath, function (err) {
-    if (err) {
-      res.send(err);
-    }
-  });
+    const uploadDirectory = tempFile();
+    const pdfFilePath = uploadDirectory + "/sample.pdf";
+    const xlsxFilePath = uploadDirectory + "/sample.xlsx";
+    const pdfFile = req.files.file[0];
+    const xlsxFile = req.files.file[1];
 
-  const data = {
-    pdfFilePath: pdfFilePath,
-    xlsxFilePath: xlsxFilePath,
-    jsonFilePath: "./static/sample/sample.json",
-  };
+    pdfFile.mv(pdfFilePath, function (err) {
+        if (err) {
+            res.send(err);
+        }
+    });
+    xlsxFile.mv(xlsxFilePath, function (err) {
+        if (err) {
+            res.send(err);
+        }
+    });
 
-  res.json(JSON.stringify(data));
+    const data = {
+        pdfFilePath: pdfFilePath,
+        xlsxFilePath: xlsxFilePath,
+        jsonFilePath: "./static/sample/sample.json",
+    };
+
+    // const removeWorkingPath = (path) => fs.rmSync(path, {recursive: true});
+    // setTimeout(() => {
+    //     removeWorkingPath(uploadDirectory)
+    // }, 2000)
+
+
+    res.json(JSON.stringify(data));
 });
 
 app.get("/downloadArchival", (req, res) => {
