@@ -13,16 +13,14 @@ let isValid = function checkform() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let tof = isValid();
-  if (tof == true) {
+  let isFormValid = isValid();
+  if (isFormValid == true) {
     console.log("dfdf");
     const filesFormData = new FormData();
     const pdfFile = document.querySelector("#pdfFile");
     const xlsxFile = document.querySelector("#xlsxFile");
-
     filesFormData.append("file", pdfFile.files[0]);
     filesFormData.append("file", xlsxFile.files[0]);
-
     uploadFiles(filesFormData);
   }
   return false;

@@ -1,7 +1,7 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const app = express();
-const port = 3000;
+const port = 4000;
 const tempFile = require("./scripts/tempFile");
 const fs = require("fs");
 const path = require("path");
@@ -42,6 +42,8 @@ app.post("/generate", (req, res) => {
   const jsonFilePath = `static/${parentDir}/jsonData.json`;
   const jsonData = req.body.jsonData;
 
+  // if (jsonData !== "{}") {
+  // }
   fs.writeFile(jsonFilePath, jsonData, "utf8", (err) => {
     if (err) {
       console.log("An error occured while writing JSON Object to File.");
