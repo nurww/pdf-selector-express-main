@@ -18,7 +18,6 @@ function ValidateExcel() {
     excelUploader.value = "";
     return;
   }
-  checkform();
 }
 
 function ValidatePdf() {
@@ -29,7 +28,6 @@ function ValidatePdf() {
     pdfUploader.value = "";
     return;
   }
-  checkform();
 }
 
 function ValidateJson() {
