@@ -7,10 +7,6 @@ const fs = require("fs");
 const path = require("path");
 const process = require("process");
 const javaRunner = require("./scripts/generate");
-const nano = require("nanoseconds");
-const perf_hooks = require("perf_hooks");
-const { TokenClass } = require("typescript");
-const { send } = require("process");
 
 process.chdir(__dirname);
 generator = javaRunner();
@@ -80,7 +76,7 @@ app.post("/generate", (req, res) => {
         jsonFilePath
     );
 
-    res.send({ token: token, archivalPath: archivalPath });
+    res.send({token: token, archivalPath: archivalPath});
 });
 
 app.post("/", (req, res) => {
@@ -109,6 +105,12 @@ app.post("/", (req, res) => {
         jsonFilePath: "./static/sample/sample.json",
     };
 
+    const removeWorkingPath = (path) => fs.rmSync(path, {recursive: true});
+    setTimeout(() => {
+        removeWorkingPath(uploadDirectory)
+    }, 2000)
+
+
     res.json(JSON.stringify(data));
 });
 
@@ -121,9 +123,9 @@ app.post("/statuscheck", (req, res) => {
     let token = req.body["token"];
     let status = statusMap[token];
     if (status == "ready") {
-        res.send({ status: status, path: jobs[token] });
+        res.send({status: status, path: jobs[token]});
     } else {
-        res.send({ status: status });
+        res.send({status: status});
     }
 });
 

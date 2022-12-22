@@ -9,5 +9,7 @@ function useTemp() {
 
   const removeWorkingPath = (path) => fs.rmSync(path, { recursive: true });
 
+
+
   return getWorkingPath();
 }
