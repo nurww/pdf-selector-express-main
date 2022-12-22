@@ -105,10 +105,10 @@ app.post("/", (req, res) => {
         jsonFilePath: "./static/sample/sample.json",
     };
 
-    const removeWorkingPath = (path) => fs.rmSync(path, {recursive: true});
-    setTimeout(() => {
-        removeWorkingPath(uploadDirectory)
-    }, 2000)
+    // const removeWorkingPath = (path) => fs.rmSync(path, {recursive: true});
+    // setTimeout(() => {
+    //     removeWorkingPath(uploadDirectory)
+    // }, 2000)
 
 
     res.json(JSON.stringify(data));

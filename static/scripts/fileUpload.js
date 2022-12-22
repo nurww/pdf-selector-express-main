@@ -52,7 +52,7 @@ const uploadFiles = (formData) => {
 const generate = document.querySelector("#generate");
 generate.addEventListener("click", () => {
     let jsonData = getCords();
-    console.log(jsonData);
+    console.log(jsonData + " jsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonData");
 
     const filesObj = {
         pdfFilePath: localStorage.getItem("pdfFilePath"),
