@@ -46,6 +46,7 @@ const uploadFiles = (formData) => {
 
 const generate = document.querySelector("#generate");
 generate.addEventListener("click", () => {
+
   let jsonData = getCords();
   console.log(jsonData);
 
@@ -82,6 +83,7 @@ generate.addEventListener("click", () => {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
+
             Accept: "application/json",
             "Content-Type": "application/json",
           },
