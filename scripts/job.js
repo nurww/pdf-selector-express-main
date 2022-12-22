@@ -1,16 +1,15 @@
 exports = module.exports = Job;
 
 class Job {
-    status = false;
+  status = false;
 
-    getStatus() {
-        return this.status;
-    }
+  getStatus() {
+    return this.status;
+  }
 
-    setStatus() {
-        return this.status;
-    }
+  setStatus() {
+    return this.status;
+  }
 
-    Job() {
-    }
+  Job() {}
 }

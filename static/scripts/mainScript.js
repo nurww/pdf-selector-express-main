@@ -321,6 +321,7 @@ const getCords = (function (arrOfCords) {
   }
 
   return function () {
+    console.log(JSON.stringify(objOfCords));
     return JSON.stringify(objOfCords);
   };
 })(cords);
