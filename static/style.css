@@ -25,6 +25,7 @@ label{
     float: left;
     color: aliceblue;
     text-align: center;
+    margin: 2px;
     padding:8px 12px;
     text-decoration: none;
     font-size: 18px; 
@@ -131,6 +132,8 @@ ul{
   
 #test{
     display: flex;
+    background-color:rgb(243, 120, 120);
+
 
 }
 
@@ -145,6 +148,7 @@ canvas{
 }
 canvas[id^="input_"]{
     border: 1px solid black; 
+    position: relative;
 }
 
 .pagination{
