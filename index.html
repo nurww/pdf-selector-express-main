@@ -46,7 +46,18 @@
         </div>
         <hr>
         <div class="_tooler_downbar ">
-            <div class="formcont">
+            <div class="container-kit">
+            <div class="toggler formcont">
+                <input type="radio" id="radio-text"
+                       name="input" value="text" checked>
+                <label for="radio-text">Text</label>
+
+                <input type="radio" id="radio-barcode"
+                       name="input" value="barcode">
+                <label for="radio-barcode">Barcode</label>
+            </div>
+
+            <div class="formcont menu-kit text-input">
                 <label for="font-scroller">Font Size</label>
                 <input id="font-scroller" type="text" class="button-48" value="12">
                 <label for="font-scroller">Font Family</label>
@@ -63,6 +74,14 @@
                 <br>
             </div>
 
+            <div class="formcont menu-kit barcode-input">
+                <label for="barcode-height">Height</label>
+                <input id="barcode-height" type="text" class="button-48 barcode-height" value="30">
+                <label for="barcode-width">Width</label>
+                <input id="barcode-width" type="text" class="button-48 barcode-width" value="200">
+                <br>
+            </div>
+            </div>
             <hr>
             <button type="submit" id='downloadJson' class="button-47 ">Download Json</button>
             <a href="" id="downloadAnchorElem"></a>

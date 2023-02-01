@@ -15,7 +15,6 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   let tof = isValid();
   if (tof == true) {
-    console.log("dfdf");
     const filesFormData = new FormData();
     const pdfFile = document.querySelector("#pdfFile");
     const xlsxFile = document.querySelector("#xlsxFile");
@@ -50,15 +49,15 @@ const generate = document.querySelector("#generate");
 generate.addEventListener("click", () => {
 
   let jsonData = getCords();
-  console.log(jsonData);
+  console.log("______________________________________________________________________")
+  console.log(jsonData)
+    console.log("______________________________________________________________________")
 
   const filesObj = {
     pdfFilePath: localStorage.getItem("pdfFilePath"),
     xlsxFilePath: localStorage.getItem("xlsxFilePath"),
     jsonData: jsonData,
   };
-
-  console.log(filesObj);
 
   fetch("/generate", {
     method: "POST",
@@ -70,7 +69,6 @@ generate.addEventListener("click", () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(JSON.stringify(data));
 
       const token = data["token"];
       const archivalPath = data["archivalPath"];
