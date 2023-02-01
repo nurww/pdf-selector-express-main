@@ -403,16 +403,13 @@ const getCords = (function (arrOfCords) {
     event = event || window.event;
     var x = event.offsetX;
     var y = event.offsetY;
+    if (type == "barcode") {
+      type = "barcode";
+    }
 
-    // if(type == "barcode"){
-    // type = "barcode";
-
-    // }
-
-    // if(type == "text"){
-    // type = "text"
-    // }
-
+    if (type == "text") {
+      type = "text";
+    }
     let fsInput = document.getElementById("font-scroller");
     let ffInput = document.getElementById("font-family");
 
@@ -421,7 +418,18 @@ const getCords = (function (arrOfCords) {
     let fontsize = fsInput.value;
     let fontfamily = ffInput.value;
     let editable = true;
-    displayOnCanva(id, x, y, title, fontsize, fontfamily, editable);
+    displayOnCanva(
+      id,
+      type,
+      x,
+      y,
+      title,
+      fontsize,
+      fontfamily,
+      editable,
+      height,
+      width
+    );
   }
 
   function displayOnCanva(
@@ -436,30 +444,33 @@ const getCords = (function (arrOfCords) {
     height,
     width
   ) {
-    let inputHolder = new InputHolder(
-      id,
-      type,
-      x,
-      y,
-      title,
-      fontsize,
-      fontfamily,
-      editable
-    );
-    inputHolder.create();
-    // if (type == "barcode") {
-    //   let inputBarcodeHolder = new InputBarcodeHolder(
-    //     id,
-    //     id,
-    //     type,
-    //     x,
-    //     y,
-    //     title,
-    //     height,
-    //     width,
-    //     editable
-    //   );
-    // }
+    if (type == "barcode") {
+      let barcodeType = someElement.value;
+      let BarcodeHolder = new InputBarcodeHolder(
+        id,
+        type,
+        barcodeType,
+        x,
+        y,
+        title,
+        height,
+        width,
+        editable
+      );
+      barcodeHolder.create();
+    } else if (type == "text") {
+      let inputHolder = new InputHolder(
+        id,
+        type,
+        x,
+        y,
+        title,
+        fontsize,
+        fontfamily,
+        editable
+      );
+      inputHolder.create();
+    }
   }
 
   function sendCords(x, y) {
