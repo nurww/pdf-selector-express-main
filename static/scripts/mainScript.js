@@ -50,6 +50,8 @@ const getCords = (function (arrOfCords) {
   //   constructor(id, type, x, y, title, height, width, editable) {
   //     this.x = x;
   //     this.y = y;
+  //     this.width= width;
+  //     this.height = height;
   //     this.id = id;
   //     this.inpText = title;
   //     this.canva = document.createElement("canvas");
@@ -213,17 +215,39 @@ const getCords = (function (arrOfCords) {
         this.save();
       }.bind(this);
 
+      // this.onDown = function (e) {
+      //   // let ball = this.canva;
+      //   this.canva.style.position = "absolute";
+      //   moveAt(e);
+      //   document.body.appendChild(this.canva);
+      //   this.canva.style.zIndex = 1000; // показывать мяч над другими элементами
+      //   function moveAt(e) {
+      //     this.x = e.pageX + "px";
+      //     this.y = e.pageY + "px";
+      //     this.render();
+      //   }
+      //   // 3, перемещать по экрану
+      //   document.onmousemove = function (e) {
+      //     moveAt(e);
+      //   };
+      //   // 4. отследить окончание переноса
+      //   this.canva.onmouseup = function () {
+      //     document.onmousemove = null;
+      //     this.canva.onmouseup = null;
+      //   };
+      // }.bind(this);
       this.onMove = function (e) {
         workspace.addEventListener("mouseup", this.onUp);
         if (this.dragok) {
           workspace.addEventListener("mousemove", (event) => {
-            this.x = e.offsetX;
-            this.y = e.offsetY;
+            this.render();
+
+            this.x = e.layerX;
+            this.y = e.layerY;
 
             // console.log(this.x, " ", e.offsetX, " ", this.y, " ", e.offsetY);
-            console.log(e.movementX);
+            console.log(e);
           });
-          this.render();
         }
       }.bind(this);
 
@@ -232,7 +256,7 @@ const getCords = (function (arrOfCords) {
         if (target.id.includes(this.id)) {
           this.dragok = true;
           console.log("down");
-          workspace.addEventListener("mousemove", this.onMove);
+          document.addEventListener("mousemove", this.onMove);
         }
         this.render();
       }.bind(this);
@@ -262,15 +286,13 @@ const getCords = (function (arrOfCords) {
       this.coursor.create(this.fontSize);
       this.coursor.editable = this.editable;
 
-      // document.addEventListener("keyup", this.onKeyPress);
-      // this.canva.addEventListener("contextmenu", this.onDelete);
-      // this.canva.addEventListener("click", this.onEdit);
-      // this.canva.addEventListener("dblclick", this.stopProp);
-      // this.parent.addEventListener("dblclick", this.onFocusCheck);
-      // this.canvas.addEventListener("drag", () => {
-      //   console.log("dragging");
-      // });
-      workspace.addEventListener("mousedown", this.onDown);
+      document.addEventListener("keyup", this.onKeyPress);
+      this.canva.addEventListener("contextmenu", this.onDelete);
+      this.canva.addEventListener("click", this.onEdit);
+      this.canva.addEventListener("dblclick", this.stopProp);
+      this.parent.addEventListener("dblclick", this.onFocusCheck);
+
+      this.canva.addEventListener("mousedown", this.onDown);
       this.render();
       if (this.editable == false) {
         this.save();
@@ -425,19 +447,19 @@ const getCords = (function (arrOfCords) {
       editable
     );
     inputHolder.create();
-    if (type == "barcode") {
-      let inputBarcodeHolder = new InputBarcodeHolder(
-        id,
-        id,
-        type,
-        x,
-        y,
-        title,
-        height,
-        width,
-        editable
-      );
-    }
+    // if (type == "barcode") {
+    //   let inputBarcodeHolder = new InputBarcodeHolder(
+    //     id,
+    //     id,
+    //     type,
+    //     x,
+    //     y,
+    //     title,
+    //     height,
+    //     width,
+    //     editable
+    //   );
+    // }
   }
 
   function sendCords(x, y) {
