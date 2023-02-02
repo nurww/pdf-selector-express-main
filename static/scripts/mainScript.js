@@ -14,6 +14,7 @@ const getCords = (function (arrOfCords) {
   const fileInput = document.querySelector("#jsonFileUpload");
   const downloadButton = document.querySelector("#downloadJson");
   const workspace = document.querySelector("#test");
+  const toggle = document.querySelector("#toggle-button");
 
   // event listeners
   fileInput.addEventListener("change", readFile);
@@ -46,91 +47,92 @@ const getCords = (function (arrOfCords) {
   }
 
   // Events
-  // class InputBarcodeHolder extends InputHolder {
-  //   constructor(id, type, x, y, title, height, width, editable) {
-  //     this.x = x;
-  //     this.y = y;
-  //     this.width= width;
-  //     this.height = height;
-  //     this.id = id;
-  //     this.inpText = title;
-  //     this.canva = document.createElement("canvas");
-  //     this.ctx = this.canva.getContext("2d");
-  //     this.coursor = new Coursor(this.x, this.y, this.id);
-  //     this.editable = editable;
-  //     this.fontSize = fontsize;
-  //     this.fontFamily = fontfamily;
-  //     this.parent = document.getElementById("the-canvas");
-  //     this.onKeyPress = function (e) {
-  //       if (this.editable == false) {
-  //         return;
-  //       }
-  //       if (e.key == "Backspace") {
-  //         this.inpText = this.inpText.slice(0, -1);
-  //       } else if (e.key == "Enter") {
-  //         if (this.inpText == "" || this.inpText == " ") {
-  //           this.editable = false;
-  //           this.delete();
-  //         } else {
-  //           this.editable = false;
-  //           this.coursor.editable = false;
-  //           this.save();
-  //         }
-  //       } else {
-  //         if (
-  //           (e.which >= 48 && e.which <= 57) ||
-  //           (e.which >= 65 && e.which <= 90) ||
-  //           (e.which >= 96 && e.which <= 105) ||
-  //           e.which == 32
-  //         ) {
-  //           this.inpText += `${e.key}`;
-  //         }
-  //       }
-  //       this.render();
-  //     }.bind(this);
+  class BarcodeHolder {
+    constructor(id, type, x, y, title, height, width, editable) {
+      this.x = x;
+      this.y = y;
+      this.type = type;
+      this.width = width;
+      this.height = height;
+      this.id = id;
+      this.inpText = title;
+      this.canva = document.createElement("canvas");
+      this.ctx = this.canva.getContext("2d");
+      this.coursor = new Coursor(this.x, this.y, this.id);
+      this.editable = editable;
+      this.fontSize = fontsize;
+      this.fontFamily = fontfamily;
+      this.parent = document.getElementById("the-canvas");
+      this.onKeyPress = function (e) {
+        if (this.editable == false) {
+          return;
+        }
+        if (e.key == "Backspace") {
+          this.inpText = this.inpText.slice(0, -1);
+        } else if (e.key == "Enter") {
+          if (this.inpText == "" || this.inpText == " ") {
+            this.editable = false;
+            this.delete();
+          } else {
+            this.editable = false;
+            this.coursor.editable = false;
+            this.save();
+          }
+        } else {
+          if (
+            (e.which >= 48 && e.which <= 57) ||
+            (e.which >= 65 && e.which <= 90) ||
+            (e.which >= 96 && e.which <= 105) ||
+            e.which == 32
+          ) {
+            this.inpText += `${e.key}`;
+          }
+        }
+        this.render();
+      }.bind(this);
 
-  //     this.onFocusCheck = function (e) {
-  //       if (
-  //         this.inpText == "" ||
-  //         (this.inpText == " " && this.editable == true)
-  //       ) {
-  //         this.editable = false;
-  //         this.delete();
-  //       } else if (
-  //         (this.editable == true && this.inpText !== "") ||
-  //         this.inpText !== " "
-  //       ) {
-  //         this.editable = false;
-  //         this.coursor.editable = false;
-  //         this.save();
-  //       }
-  //     }.bind(this);
+      this.onFocusCheck = function (e) {
+        if (
+          this.inpText == "" ||
+          (this.inpText == " " && this.editable == true)
+        ) {
+          this.editable = false;
+          this.delete();
+        } else if (
+          (this.editable == true && this.inpText !== "") ||
+          this.inpText !== " "
+        ) {
+          this.editable = false;
+          this.coursor.editable = false;
+          this.save();
+        }
+      }.bind(this);
 
-  //     this.stopProp = function (e) {
-  //       e.stopPropagation();
-  //     }.bind(this);
+      this.stopProp = function (e) {
+        e.stopPropagation();
+      }.bind(this);
 
-  //     this.onDelete = function (e) {
-  //       e.preventDefault();
-  //       e.stopPropagation();
-  //       if (!this.editable) {
-  //         this.delete();
-  //       } else {
-  //         this.editable = false;
-  //         this.coursor.editable = false;
-  //         this.delete(this.id);
-  //       }
-  //     }.bind(this);
+      this.onDelete = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!this.editable) {
+          this.delete();
+        } else {
+          this.editable = false;
+          this.coursor.editable = false;
+          this.delete(this.id);
+        }
+      }.bind(this);
 
-  //     this.onEdit = function (e) {
-  //       e.stopPropagation();
-  //       this.editable = true;
-  //       this.coursor.editable = true;
-  //       this.render();
-  //       this.save();
-  //     }.bind(this);
-  //   }
-  // }
+      this.onEdit = function (e) {
+        e.stopPropagation();
+        this.editable = true;
+        this.coursor.editable = true;
+        this.render();
+        this.save();
+      }.bind(this);
+    }
+  }
 
   class InputHolder {
     constructor(id, x, y, title, fontsize, fontfamily, editable) {
@@ -399,17 +401,22 @@ const getCords = (function (arrOfCords) {
   }
 
   function clickingWorkspacehandler(event) {
+    console.log(type);
+
     event.stopPropagation();
     event = event || window.event;
     var x = event.offsetX;
     var y = event.offsetY;
-    if (type == "barcode") {
-      type = "barcode";
-    }
+    let type = toggle.value;
+    // if (type == "barcode") {
+    //   type = "barcode";
+    // }
 
-    if (type == "text") {
-      type = "text";
-    }
+    // if (type == "text") {
+    //   type = "text";
+    // } else {
+    console.log(type);
+    // }
     let fsInput = document.getElementById("font-scroller");
     let ffInput = document.getElementById("font-family");
 

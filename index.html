@@ -48,6 +48,8 @@
             <hr>
             <div class="_tooler_downbar ">
                 <div class="formcont">
+                    <h3 style="margin: auto;">Text</h3>
+
                     <label for="font-scroller">Font Size</label>
                     <input id="font-scroller" type="text" class="button-48" value="12">
                     <label for="font-scroller">Font Family</label>
@@ -66,8 +68,27 @@
                 <hr>
 
                 <div class="formcont">
+                    <div style="display: flex;justify-content: space-between ; margin-bottom: 10px; ">
+                        <h3 style="margin: 0;">Barcode</h3>
+                        <input type="checkbox" name="toggle" id="toggle-button" class="toggle-button">
+                    </div>
+                    <div style="display: flex;">
+                        <div style="padding-right: 2px;">
+                            <label for="barcode-width">Width</label>
+                            <input id="barcode-width" type="number" class="button-48" value="40">
+                        </div>
+                        <div style="padding-left: 2px;">
+                            <label for="barcode-height">Height</label>
+                            <input id="barcode-height" type="number" class="button-48" value="20">
+                        </div>
+                    </div>
+
                     <label for="barcode-type">Barcode Type</label>
-                    sel
+
+                    <select name="barcode-type" id="barcode-type" class="button-48">
+                        <option value="39">39-128</option>
+                        <option value="128">128-128</option>
+                    </select>
                 </div>
 
                 <hr>
