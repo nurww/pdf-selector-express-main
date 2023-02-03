@@ -47,7 +47,7 @@ const getCords = (function (arrOfCords) {
 
     // Events
     class InputHolder {
-        constructor(id, x, y, title, inputType, width, height, fontsize, fontfamily, editable) {
+        constructor(id, x, y, title, inputType, width, height, fontsize, fontfamily, align, editable) {
             this.x = x;
             this.y = y;
             this.id = id;
@@ -55,6 +55,7 @@ const getCords = (function (arrOfCords) {
             this.inputType = inputType;
             this.width = width;
             this.height = height;
+            this.align = align;
             this.canva = document.createElement("canvas");
             this.ctx = this.canva.getContext("2d");
             this.coursor = new Coursor(this.x, this.y, this.id);
@@ -143,6 +144,7 @@ const getCords = (function (arrOfCords) {
             this.ctx.fillStyle = "white";
             this.ctx.rect(0, 0, 70, this.canva.height);
             this.ctx.fillRect(0, 0, 70, this.canva.height);
+            this.ctx.textAlign = "center"
 
 
 
@@ -185,6 +187,7 @@ const getCords = (function (arrOfCords) {
                 body: bodyObj,
                 fontSize: this.fontSize,
                 fontFamily: this.fontFamily,
+                align: this.align
             };
             objOfCords[this.id] = newCord;
             return {...newCord};
@@ -314,22 +317,23 @@ const getCords = (function (arrOfCords) {
 
         let fsInput = document.getElementById("font-scroller");
         let ffInput = document.getElementById("font-family");
-
         let wInput = document.getElementById("barcode-width");
         let hInput = document.getElementById("barcode-height");
+        let alignInput = document.getElementById("text-align");
 
         let id = `${Math.floor(Math.random() * 100000)}`;
         let title = "";
         let width = wInput.value;
         let height = hInput.value;
+        let align = alignInput.value;
 
         let fontsize = fsInput.value;
         let fontfamily = ffInput.value;
         let editable = true;
-        displayOnCanva(id, x, y, title, inputType, width, height, fontsize, fontfamily, editable);
+        displayOnCanva(id, x, y, title, inputType, width, height, fontsize, fontfamily, align, editable);
     }
 
-    function displayOnCanva(id, x, y, title, inputType, width, height, fontsize, fontfamily, editable) {
+    function displayOnCanva(id, x, y, title, inputType, width, height, fontsize, fontfamily, align, editable) {
         let inputHolder = new InputHolder(
             id,
             x,
@@ -340,6 +344,7 @@ const getCords = (function (arrOfCords) {
             height,
             fontsize,
             fontfamily,
+            align,
             editable
         );
         inputHolder.create();
@@ -380,8 +385,9 @@ const getCords = (function (arrOfCords) {
             let height = val.height;
             let fontsize = val.fontSize;
             let fontfamily = val.fontFamily;
+            let align = val.align;
             let editable = false;
-            displayOnCanva(id, x, y, title, inputType, width, height, fontsize, fontfamily, editable);
+            displayOnCanva(id, x, y, title, inputType, width, height, fontsize, fontfamily, align, editable);
         }
     }
 
