@@ -1,6 +1,7 @@
 const cords = [];
 
 const getCords = (function (arrOfCords) {
+
     var bodyObj = {};
 
     let canv = document.getElementById("the-canvas");
@@ -48,19 +49,21 @@ const getCords = (function (arrOfCords) {
     // Events
     class InputHolder {
         constructor(id, x, y, title, inputType, width, height, fontsize, fontfamily, align, editable) {
-            this.x = x;
-            this.y = y;
+            this.x = x * scale;
+            this.y = y * scale;
             this.id = id;
             this.inpText = title;
             this.inputType = inputType;
-            this.width = width;
-            this.height = height;
+            this.width = width *scale;
+            this.height = height *scale;
+            // this.width = width;
+            // this.height = height;
             this.align = align;
             this.canva = document.createElement("canvas");
             this.ctx = this.canva.getContext("2d");
             this.coursor = new Coursor(this.x, this.y, this.id);
             this.editable = editable;
-            this.fontSize = fontsize;
+            this.fontSize = fontsize *scale;
             this.fontFamily = fontfamily;
             this.parent = document.getElementById("the-canvas");
             this.onKeyPress = function (e) {
@@ -170,6 +173,11 @@ const getCords = (function (arrOfCords) {
             this.canva.addEventListener("click", this.onEdit);
             this.canva.addEventListener("dblclick", this.stopProp);
             this.parent.addEventListener("dblclick", this.onFocusCheck);
+
+            workspace.addEventListener('change', e => {
+                console.log("dsankjfnajf")
+            })
+
             this.render();
             if (this.editable == false) {
                 this.save();
@@ -256,6 +264,8 @@ const getCords = (function (arrOfCords) {
             makeJson();
             delete objOfCords[this.id];
         }
+
+
     }
 
     class Coursor {

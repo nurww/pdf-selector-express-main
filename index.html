@@ -47,45 +47,65 @@
         <hr>
         <div class="_tooler_downbar ">
             <div class="container-kit">
-            <div class="toggler formcont">
-                <input type="radio" id="radio-text"
-                       name="input" value="text" checked>
-                <label for="radio-text">Text</label>
+                <div class="toggler toggler-scaler formcont">
+                    <div>
+                        <button class="button-47 scale" type="button" id="button-reduce"
+                                name="scale" value="enlarge">Reduce
+                        </button>
 
-                <input type="radio" id="radio-barcode"
-                       name="input" value="barcode">
-                <label for="radio-barcode">Barcode</label>
-            </div>
+                        <button class="button-47 scale" type="button" id="button-enlarge"
+                                name="scale" value="-">Enlarge
+                        </button>
+                    </div>
+                    <div>
 
-            <div class="formcont menu-kit text-input">
-                <label for="font-scroller">Font Size</label>
-                <input id="font-scroller" type="text" class="button-48" value="12">
-                <label for="font-scroller">Font Family</label>
-                <select name="font-family" id="font-family" class="button-48" style="width: 100%;">
-                    <option value="Arial" selected>Arial</option>
-                    <option value="Verdana">Verdana</option>
-                    <option value="Tahoma">Tahoma</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Courier New">Courier New</option>
-                    <option value="Trebuchet MS">Trebuchet MS</option>
-                    <option value="Brush Script MT">Brush Script MT</option>
-                </select>
-                <label for="text-align">Align</label>
-                <select name="text-align" id="text-align" class="button-48" style="width: 100%;">
-                    <option value="left" selected>Left</option>
-                    <option value="center">Center</option>
-                </select>
-                <br>
-            </div>
+                        <label for="scale-input">Scale</label>
+                        <input id="scale-input" type="text" class="button-48 barcode-height" value="1" disabled>
+                    </div>
+                </div>
 
-            <div class="formcont menu-kit barcode-input">
-                <label for="barcode-height">Height</label>
-                <input id="barcode-height" type="text" class="button-48 barcode-height" value="30">
-                <label for="barcode-width">Width</label>
-                <input id="barcode-width" type="text" class="button-48 barcode-width" value="200">
-                <br>
-            </div>
+
+                <div class="toggler toggler-radio formcont">
+                    <div class="radio-container button-47">
+                        <input type="radio" id="radio-text"
+                               name="input" value="text" checked>
+                        <label for="radio-text">Text</label></div>
+                    <div class="radio-container button-47">
+                        <input type="radio" id="radio-barcode"
+                               name="input" value="barcode">
+                        <label for="radio-barcode">Barcode</label>
+                    </div>
+                </div>
+
+                <div class="formcont menu-kit text-input">
+                    <label for="font-scroller">Font Size</label>
+                    <input id="font-scroller" type="text" class="button-48" value="12">
+                    <label for="font-scroller">Font Family</label>
+                    <select name="font-family" id="font-family" class="button-48" style="width: 100%;">
+                        <option value="Arial" selected>Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Brush Script MT">Brush Script MT</option>
+                    </select>
+                    <label for="text-align">Align</label>
+                    <select name="text-align" id="text-align" class="button-48" style="width: 100%;">
+                        <option value="left" selected>Left</option>
+                        <option value="center">Center</option>
+                    </select>
+                    <br>
+                </div>
+
+                <div class="formcont menu-kit barcode-input">
+                    <label for="barcode-height">Height</label>
+                    <input id="barcode-height" type="text" class="button-48 barcode-height" value="30">
+                    <label for="barcode-width">Width</label>
+                    <input id="barcode-width" type="text" class="button-48 barcode-width" value="200">
+                    <br>
+                </div>
             </div>
             <hr>
             <button type="submit" id='downloadJson' class="button-47 ">Download Json</button>
@@ -143,3 +163,4 @@
 <script src="/static/scripts/mainScript.js"></script>
 <script src="/static/scripts/pdfscript.js"></script>
 <script src="/static/scripts/fileUpload.js"></script>
+<script src="/static/scripts/scalePdfPage.js"></script>

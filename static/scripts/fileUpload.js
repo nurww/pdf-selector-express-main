@@ -48,6 +48,8 @@ const uploadFiles = (formData) => {
 const generate = document.querySelector("#generate");
 generate.addEventListener("click", () => {
 
+    console.log(scale + " scalescalescalescalescalescalescale")
+
   let jsonData = getCords();
   console.log("______________________________________________________________________")
   console.log(jsonData)
